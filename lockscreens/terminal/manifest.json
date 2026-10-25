@@ -81,16 +81,16 @@
       "source": "assets/preview.gif",
       "destination": "preview.gif",
       "mode": "0644",
-      "size": 111169,
-      "sha256": "246aab059b86a4e2b916bdb1890dbc6a1ce7c3fc0686431520becfeb7c8f1491",
+      "size": 131009,
+      "sha256": "010ab3bf5eba352daf3a196d1a6bd17fce3d5deb2810bf959195625ce5c235c2",
       "install": false
     },
     {
       "source": "assets/shot-1.png",
       "destination": "shot-1.png",
       "mode": "0644",
-      "size": 257126,
-      "sha256": "6ce9732525bac9f0427c97a9f37d36ab301fac8a2465576daf655ba963352374",
+      "size": 325971,
+      "sha256": "5b27a560ee4734a2d02947bb9b665d99ff96f6a508cb8d0a077bfbe383af8c4e",
       "install": false
     }
   ]
