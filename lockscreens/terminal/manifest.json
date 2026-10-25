@@ -2,15 +2,15 @@
   "schema": 1,
   "id": "terminal",
   "category": "lockscreens",
-  "version": "1.1.3",
+  "version": "1.2.0",
   "destination": "qylock/themes/terminal",
   "files": [
     {
       "source": "content/Main.qml",
       "destination": "Main.qml",
       "mode": "0644",
-      "size": 30950,
-      "sha256": "2b406c8f948fd299ea10206dedd5c0b3466f62201e2695727213dfb17fffaf0d",
+      "size": 34753,
+      "sha256": "75c4f2f23b0ae356c778a8060e17c59fc98d346930886131092ce4db9b9bbc2e",
       "install": true
     },
     {
@@ -18,7 +18,7 @@
       "destination": "metadata.desktop",
       "mode": "0644",
       "size": 179,
-      "sha256": "bd9010bed277dcd4eaabbb355f1061da6b397d6ef4d1f298a10ea9d697628576",
+      "sha256": "3dfad4ec88a6a6a46530a033779286c92f5293370684d92781b3314d62f78cdf",
       "install": true
     },
     {

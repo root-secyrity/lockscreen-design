@@ -74,6 +74,62 @@ python3 -c "import json,hashlib;r=json.load(open('../registry.json'))['lockscree
 One folder and one registry entry per skin. No other files are required, and the
 package must not reference paths outside `lockscreens/<id>/`.
 
+## The PROCESSES box (terminal skin) and its daemon
+
+The `terminal` skin shows a process table (PID / NAME / CPU / MEM). A lock theme
+cannot read that by itself: it reads files with XMLHttpRequest, and `/proc` is a
+directory, so it cannot be listed from inside the lock.
+
+The rows come from `~/.cache/qylock-procs`, which a small user service keeps
+fresh. That is the same pattern the engine already uses for `qylock-media` and
+`qylock-keymap`.
+
+`~/.local/bin/qylock-procs-daemon`:
+
+```bash
+#!/bin/bash
+cache="$HOME/.cache/qylock-procs"
+tmp="$cache.tmp"
+while true; do
+    ps -eo pid=,comm=,pcpu=,rss= --sort=-pcpu --no-headers 2>/dev/null \
+        | head -n 8 | awk '{printf "%s|%s|%s|%s\n", $1, $2, $3, $4}' > "$tmp"
+    [ -s "$tmp" ] && mv -f "$tmp" "$cache"
+    sleep 2
+done
+```
+
+`~/.config/systemd/user/qylock-procs.service`:
+
+```ini
+[Unit]
+Description=qylock processes daemon (process table for lock themes)
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/qylock-procs-daemon
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
+```
+
+```bash
+chmod +x ~/.local/bin/qylock-procs-daemon
+systemctl --user daemon-reload
+systemctl --user enable --now qylock-procs.service
+```
+
+**Without the daemon the skin still works.** The box falls back to scheduler
+counters it can always read from `/proc/loadavg` (running, threads, last pid,
+load), so it never shows an invented process list. The table is the richer form,
+not a requirement.
+
+What the box exposes: executable names (from `ps -o comm`, not command lines) and
+PIDs, on a screen anyone standing at the machine can see. Publish a preview
+screenshot only after deciding you are fine with that.
+
 ## Licence
 
 Each package carries its own `LICENSE` and `PROVENANCE.txt`; read those in

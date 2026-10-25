@@ -43,6 +43,14 @@ Rectangle {
     property real mediaLen: 0
 
     // ── live system stats (read from /proc + /sys, no daemon) ─────────────
+    // scheduler counters out of /proc/loadavg ("0.42 0.31 0.20 2/412 12345");
+    // these drive the PROCESSES box
+    property string procsRunning: "--"
+    property string procsThreads: "--"
+    property string lastPid: "--"
+    // process table from ~/.cache/qylock-procs, written by qylock-procs-daemon
+    // (same pattern as qylock-media-daemon: the lock cannot list /proc itself)
+    property var procs: []
     property string load1: "--"; property string load5: "--"; property string load15: "--"
     property string cpuTemp: "--"
     property int memUsedPct: 0
@@ -58,7 +66,7 @@ Rectangle {
         interval: 2000
         repeat: true
         running: true
-        onTriggered: { readMedia(); readUptime(); readKeymap(); readSystem(); readKeyboard(); }
+        onTriggered: { readMedia(); readUptime(); readKeymap(); readSystem(); readKeyboard(); readProcs(); }
     }
     function readMedia() {
         var xhr = new XMLHttpRequest();
@@ -98,6 +106,12 @@ Rectangle {
             if ((xhr.status === 0 || xhr.status === 200) && xhr.responseText) {
                 var f = xhr.responseText.trim().split(/\s+/);
                 root.load1 = f[0] || "--"; root.load5 = f[1] || "--"; root.load15 = f[2] || "--";
+                // field 4 is "running/total" scheduler entities, field 5 is the
+                // last pid the kernel allocated
+                var rt = (f[3] || "").split("/");
+                root.procsRunning = rt[0] || "--";
+                root.procsThreads = rt[1] || "--";
+                root.lastPid = f[4] || "--";
             }
         } catch (e) { }
         xhr = new XMLHttpRequest();
@@ -125,6 +139,62 @@ Rectangle {
             }
         } catch (e) { }
     }
+    // process table: eight rows, one atomic cache file, written every 2s by
+    // qylock-procs-daemon. Lines are pid|comm|cpu%|rss_kb.
+    function readProcs() {
+        var xhr = new XMLHttpRequest();
+        try {
+            xhr.open("GET", "file://" + root.homePath + "/.cache/qylock-procs", false);
+            xhr.send(null);
+            if ((xhr.status === 0 || xhr.status === 200) && xhr.responseText) {
+                var out = [], lines = xhr.responseText.trim().split("\n");
+                for (var i = 0; i < lines.length && i < 8; i++) {
+                    var f = lines[i].split("|");
+                    if (f.length >= 4) out.push({ pid: f[0], name: f[1], cpu: f[2], rss: f[3] });
+                }
+                root.procs = out;
+            }
+        } catch (e) { }
+    }
+    function memStr(kb) {
+        var n = parseInt(kb) || 0;
+        return n >= 1024 ? Math.round(n / 1024) + "M" : n + "K";
+    }
+    // right-align helper: padStart is not guaranteed in the lock's JS engine,
+    // padEnd is (boxRow already relies on it)
+    function ralign(s, n) {
+        s = String(s);
+        while (s.length < n) s = " " + s;
+        return s;
+    }
+    // one table row in the RATZILLA-OPS style: [>]pid name cpu mem
+    function procLine(sel, pid, name, cpu, mem) {
+        var l = String(sel).charAt(0) + ralign(pid, 6) + " "
+              + String(name).substring(0, 11).padEnd(11) + " "
+              + ralign(cpu, 5) + " " + ralign(mem, 6);
+        return "│ " + l.substring(0, boxW - 4).padEnd(boxW - 4) + " │";
+    }
+    function procTable() {
+        if (root.procs.length === 0) {
+            // no qylock-procs-daemon on this machine: never show an invented
+            // process list, show the scheduler counters we can always read
+            return [root.boxTop("PROCESSES", root.procsRunning + "/" + root.procsThreads),
+                    root.boxRow("running", root.procsRunning),
+                    root.boxRow("threads", root.procsThreads),
+                    root.boxRow("last pid", root.lastPid),
+                    root.boxRow("load", root.load1 + " " + root.load5),
+                    root.boxBottom()].join("\n");
+        }
+        var lines = [root.boxTop("PROCESSES", root.procsRunning + "/" + root.procsThreads),
+                     root.procLine(" ", "PID", "NAME", "CPU", "MEM")];
+        for (var i = 0; i < root.procs.length; i++) {
+            var p = root.procs[i];
+            lines.push(root.procLine(i === 0 ? ">" : " ", p.pid, p.name, p.cpu, root.memStr(p.rss)));
+        }
+        lines.push(root.boxBottom());
+        return lines.join("\n");
+    }
+
     function clip(s, maxChars) { if (!s) return ""; if (maxChars <= 1) return ""; if (s.length <= maxChars) return s; return s.slice(0, maxChars - 1) + "…"; }
     function readKeymap() {
         var xhr = new XMLHttpRequest();
@@ -417,10 +487,12 @@ Rectangle {
             text: Qt.formatDate(root.now, "dddd d MMMM yyyy").toUpperCase()
         }
 
-        // SYSTEM box
+        // SYSTEM box + PROCESSES box: the right column used to end halfway down
+        // the log column, so the second box also fills that gap.
         Column {
             anchors.right: parent.right; anchors.rightMargin: root.margin
             y: 146 * root.s
+            spacing: root.lineH
             Text {
                 textFormat: Text.PlainText; font.family: root.mono; font.pixelSize: root.fontPx; lineHeight: root.lineH; lineHeightMode: Text.FixedHeight; color: root.ph
                 text: [
@@ -431,10 +503,15 @@ Rectangle {
                     root.boxRow("load", root.load1 + " " + root.load5),
                     root.boxRow("temp", root.cpuTemp),
                     root.boxRow("mem", root.memUsedPct + "% " + root.bar(root.memUsedPct, 16)),
-                    root.boxRow("audio", root.mediaPlaying ? "▶ " + root.mediaTitle : (root.mediaTitle ? "❚❚ " + root.mediaTitle : "idle")),
-                    root.boxRow("keymap", root.keymapStr),
                     root.boxBottom()
                 ].join("\n")
+            }
+            // PROCESSES: the RATZILLA-OPS table (pid / name / cpu / mem, '>' on the
+            // top row). Rows come from ~/.cache/qylock-procs, written by
+            // qylock-procs-daemon; the lock cannot list /proc by itself.
+            Text {
+                textFormat: Text.PlainText; font.family: root.mono; font.pixelSize: root.fontPx; lineHeight: root.lineH; lineHeightMode: Text.FixedHeight; color: root.ph
+                text: root.procTable()
             }
         }
 

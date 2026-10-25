@@ -2,7 +2,7 @@
 Name=Terminal
 Description=Ryoku terminal lock (CRT console)
 Author=root-sec
-Version=1.1.3
+Version=1.2.0
 Type=sddm-theme
 MainScript=Main.qml
 ConfigFile=theme.conf
