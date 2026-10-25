@@ -7,7 +7,7 @@ import QtQuick.Window
 // keyboard) plus live /proc system stats and MPRIS media.
 Rectangle {
     id: root
-    width: Screen.width; height: Screen.height; color: "black"
+    width: Screen.width; height: Screen.height; color: "#161616"
 
     // ── qylock / sddm plumbing ────────────────────────────────────────────
     property int sessionIndex: (typeof sessionModel !== "undefined" && sessionModel.lastIndex >= 0) ? sessionModel.lastIndex : 0
@@ -24,23 +24,20 @@ Rectangle {
     readonly property real lineH: Math.round(fontPx * 1.4)
     readonly property real margin: 64 * s
     readonly property int cols: Math.max(20, Math.floor((width - 2 * margin) / Math.max(1, glyph.advanceWidth)))
-    readonly property color ph:    "#E2452A"
-    readonly property color phHi:  "#FF6A45"
+    // palette (huemint 161616-bb2626-fafafa): #161616 surface, #fafafa text,
+    // #bb2626 accent. No orange left anywhere.
+    readonly property color ph:    "#fafafa"
+    readonly property color phHi:  "#bb2626"
     readonly property color phDim: Qt.rgba(ph.r * 0.5, ph.g * 0.5, ph.b * 0.5, 1)
-    readonly property color err:   "#FF2E22"
+    readonly property color err:   "#bb2626"
     readonly property string user: (userHelper.currentItem && userHelper.currentItem.uLogin) ? userHelper.currentItem.uLogin : (typeof userModel !== "undefined" ? userModel.lastUser : "user")
     property string host: "mainframe"
-    property string mediaTitle: ""
     // Portability (docs/02-engine.md § Portability): Quickshell.env is not available
     // in the lock context, so home is derived from this file's own URL.
     //   file:///home/<user>/.local/share/qylock/themes/<slug>/Main.qml
     //   terminal → themes → qylock → share → .local → HOME  (five ".." levels)
     readonly property string homeDir: Qt.resolvedUrl("../../../../..").toString().replace(/\/$/, "")
     readonly property string homePath: homeDir.replace(/^file:\/\//, "")
-    readonly property string mediaCache: homePath + "/.cache/qylock-media"
-    property bool mediaPlaying: false
-    property real mediaPos: 0
-    property real mediaLen: 0
 
     // ── live system stats (read from /proc + /sys, no daemon) ─────────────
     // scheduler counters out of /proc/loadavg ("0.42 0.31 0.20 2/412 12345");
@@ -66,21 +63,7 @@ Rectangle {
         interval: 2000
         repeat: true
         running: true
-        onTriggered: { readMedia(); readUptime(); readKeymap(); readSystem(); readKeyboard(); readProcs(); }
-    }
-    function readMedia() {
-        var xhr = new XMLHttpRequest();
-        try {
-            xhr.open("GET", "file://" + root.mediaCache, false);
-            xhr.send(null);
-            if ((xhr.status === 0 || xhr.status === 200) && xhr.responseText) {
-                var lines = xhr.responseText.trim().split("\n");
-                root.mediaTitle = lines[0] || "";
-                root.mediaPlaying = lines[1] === "Playing";
-                root.mediaPos = parseFloat(lines[2]) || 0;
-                root.mediaLen = parseFloat(lines[3]) || 0;
-            }
-        } catch (e) { /* cache not ready yet */ }
+        onTriggered: { readUptime(); readSystem(); readKeyboard(); readProcs(); }
     }
     function readUptime() {
         var xhr = new XMLHttpRequest();
@@ -195,17 +178,9 @@ Rectangle {
         return lines.join("\n");
     }
 
+    // TODO(next change): clip() has no caller - delete it together with the
+    // next edits, then one lock run covers both (user, 2026-10-26)
     function clip(s, maxChars) { if (!s) return ""; if (maxChars <= 1) return ""; if (s.length <= maxChars) return s; return s.slice(0, maxChars - 1) + "…"; }
-    function readKeymap() {
-        var xhr = new XMLHttpRequest();
-        try {
-            xhr.open("GET", "file://" + root.homePath + "/.cache/qylock-keymap", false);
-            xhr.send(null);
-            if ((xhr.status === 0 || xhr.status === 200) && xhr.responseText) {
-                root.keymapStr = xhr.responseText.trim() || "--";
-            }
-        } catch (e) { }
-    }
     function readKeyboard() {
         if (typeof keyboard !== "undefined") {
             root.capsOn = keyboard.capsLock;
@@ -231,7 +206,6 @@ Rectangle {
     property int attemptCount: 0
     property bool eqB: false
     property string hostUptime: "?h ?m"
-    property string keymapStr: "--"
     property real denyFlash: 0
     property int loaderStep: 0
     // CRT post-effect: time in SECONDS (the shader uses floor(time*30) for flicker
@@ -246,11 +220,11 @@ Rectangle {
     ListModel { id: log }
 
     function esc(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/ /g,"&nbsp;"); }
-    readonly property color sw0: "#FF6A45"
-    readonly property color sw1: "#E2452A"
-    readonly property color sw2: "#9E301D"
-    readonly property color sw3: "#712215"
-    readonly property color sw4: "#38110A"
+    readonly property color sw0: "#fafafa"
+    readonly property color sw1: "#bb2626"
+    readonly property color sw2: "#8f1d1d"
+    readonly property color sw3: "#5c1414"
+    readonly property color sw4: "#2a1111"
     function toneColor(t) { return t === "err" ? err : t === "dim" ? sw3 : t === "hi" ? sw0 : t === "logo" ? sw2 : sw1; }
     function styled(tag, text, tone) {
         var body = '<font color="' + toneColor(tone) + '">' + esc(text) + "</font>";
@@ -656,9 +630,7 @@ Rectangle {
     Component.onCompleted: {
         pwd.forceActiveFocus();
         if (typeof keyboard !== "undefined") keyboard.numLock = true;
-        readMedia();
         readUptime();
-        readKeymap();
         readSystem();
         readKeyboard();
         powerOn.start();

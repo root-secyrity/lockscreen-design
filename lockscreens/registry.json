@@ -4,7 +4,7 @@
     {
       "id": "terminal",
       "name": "Terminal",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "path": "lockscreens/terminal",
       "author": "root-sec",
       "upstream": "local",
@@ -17,14 +17,14 @@
         "console",
         "minimal"
       ],
-      "accent": "#E2452A",
-      "surface": "#101417",
+      "accent": "#bb2626",
+      "surface": "#161616",
       "preview": "assets/preview.gif",
       "screenshots": [
         "assets/shot-1.png"
       ],
       "manifest": "manifest.json",
-      "manifestSha256": "e5e15c0168de0c7f029b9ae4083e07e6af0dd4987ac889e50a431f788d013424",
+      "manifestSha256": "c54fbbaec2a1830f08ec6b510a5bfb9ccd5c5afc14b8d904025950abb7f8a291",
       "official": false,
       "lastUpdated": "2026-10-26"
     }
