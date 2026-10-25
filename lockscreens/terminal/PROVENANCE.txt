@@ -1,0 +1,9 @@
+Terminal - qylock lock skin for Ryoku
+
+Author: root-sec
+Upstream: local
+Original path: designs/terminal/
+License: MIT; see LICENSE
+
+Preview media (assets/preview.gif, assets/shot-*.png) is catalogue media and is not
+installed with the runtime payload.

@@ -1,0 +1,9 @@
+[SddmGreeterTheme]
+Name=Terminal
+Description=Ryoku terminal lock (CRT console)
+Author=root-sec
+Version=1.1.3
+Type=sddm-theme
+MainScript=Main.qml
+ConfigFile=theme.conf
+QtVersion=6
