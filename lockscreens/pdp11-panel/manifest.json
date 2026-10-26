@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "id": "pdp11-panel",
+  "category": "lockscreens",
+  "version": "1.0.0",
+  "destination": "qylock/themes/pdp11-panel",
+  "files": [
+    {
+      "source": "content/Main.qml",
+      "destination": "Main.qml",
+      "mode": "0644",
+      "size": 49364,
+      "sha256": "2950202a4b1c4de3d8ccbacabd737277cc5af1e809f6dc02075b0ee670454354",
+      "install": true
+    },
+    {
+      "source": "content/metadata.desktop",
+      "destination": "metadata.desktop",
+      "mode": "0644",
+      "size": 194,
+      "sha256": "b2d815b8c0292499af91fb5fe0e5be2c7ca56ce5986b9405cbc718bedef42c2b",
+      "install": true
+    },
+    {
+      "source": "content/shaders/lock_vignette.frag",
+      "destination": "shaders/lock_vignette.frag",
+      "mode": "0644",
+      "size": 937,
+      "sha256": "89396fa80d22051c9cc1fa385513e3fe399de40e330284231765a2a4379c43ba",
+      "install": true
+    },
+    {
+      "source": "content/shaders/lock_vignette.frag.glsl",
+      "destination": "shaders/lock_vignette.frag.glsl",
+      "mode": "0644",
+      "size": 637,
+      "sha256": "7bb312f7afd3e309561ad1ef28941cec2acb473ceccf6fec04c4d557b843d4d8",
+      "install": true
+    },
+    {
+      "source": "content/shaders/lock_vignette.frag.qsb",
+      "destination": "shaders/lock_vignette.frag.qsb",
+      "mode": "0644",
+      "size": 1894,
+      "sha256": "f8185e3221040aa1cf72755bfb817117b0a7ffa947724342aae9fe6e0b04057a",
+      "install": true
+    },
+    {
+      "source": "content/theme.conf",
+      "destination": "theme.conf",
+      "mode": "0644",
+      "size": 76,
+      "sha256": "e8a20f7d42311b6db424b7c0c5266f73a914c1a0a5a73002b8d0f04a7eb9cc98",
+      "install": true
+    },
+    {
+      "source": "LICENSE",
+      "destination": "LICENSE",
+      "mode": "0644",
+      "size": 1065,
+      "sha256": "582abd34b09e4752093ad7c848493e5cae48453ee7e9121f036b64cdf98bafd7",
+      "install": true
+    },
+    {
+      "source": "PROVENANCE.txt",
+      "destination": "PROVENANCE.txt",
+      "mode": "0644",
+      "size": 579,
+      "sha256": "9781208d88413f7a032890fcab3ca163730c2839976d5a48e70831ebd406e1f5",
+      "install": true
+    },
+    {
+      "source": "assets/preview.gif",
+      "destination": "preview.gif",
+      "mode": "0644",
+      "size": 116860,
+      "sha256": "d5e89ab4480a4fd9e618b63c1761abd16d008ef6d07cc6399445307c9177d203",
+      "install": false
+    },
+    {
+      "source": "assets/shot-1.png",
+      "destination": "shot-1.png",
+      "mode": "0644",
+      "size": 135291,
+      "sha256": "5f9a0bbd631688ba2788f5abf87419473729f4cf8ec4b7e62a47f3ca6811e57c",
+      "install": false
+    }
+  ]
+}
