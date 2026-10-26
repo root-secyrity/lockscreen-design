@@ -4,7 +4,7 @@
   {
    "id": "pdp11-panel",
    "name": "PDP-11 Panel",
-   "version": "1.0.0",
+   "version": "1.0.1",
    "path": "lockscreens/pdp11-panel",
    "author": "root-sec",
    "upstream": "https://github.com/root-secyrity/lockscreen-design",
@@ -24,7 +24,7 @@
     "assets/shot-1.png"
    ],
    "manifest": "manifest.json",
-   "manifestSha256": "64ccf2f70d18c8c5d1b23b535009d6cb52068ea18693ec1f9a25d50c9f6ec917",
+   "manifestSha256": "8b29bf1f7d34efc55120cbf2e2cd2029332c0139b2ada002bf9995358d713b42",
    "official": false,
    "lastUpdated": "2026-10-26"
   },

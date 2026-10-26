@@ -2,7 +2,7 @@
   "schema": 1,
   "id": "pdp11-panel",
   "category": "lockscreens",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "destination": "qylock/themes/pdp11-panel",
   "files": [
     {
@@ -14,11 +14,19 @@
       "install": true
     },
     {
+      "source": "content/NOTES.md",
+      "destination": "NOTES.md",
+      "mode": "0644",
+      "size": 2581,
+      "sha256": "a3f4e2fd8b86c23e204dbec69083f43ed74040cc51685704974f60f15f24015a",
+      "install": true
+    },
+    {
       "source": "content/metadata.desktop",
       "destination": "metadata.desktop",
       "mode": "0644",
       "size": 194,
-      "sha256": "b2d815b8c0292499af91fb5fe0e5be2c7ca56ce5986b9405cbc718bedef42c2b",
+      "sha256": "000ac91548795834b3a6e0ffe85de2d120bc4d58698f2c51f932489a2515337f",
       "install": true
     },
     {
