@@ -1,0 +1,5 @@
+# editor and OS droppings - the package files themselves are always intentional
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
