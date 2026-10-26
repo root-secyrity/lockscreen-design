@@ -1,0 +1,15 @@
+PDP-11 Panel - qylock lock skin for Ryoku
+
+Author: root-sec
+Upstream: https://github.com/root-secyrity/lockscreen-design
+Original path: designs/pdp11-panel/
+License: MIT; see LICENSE
+Skeleton derived from designs/terminal/ (same author, same repository)
+
+Visual references, read 2026-10-26:
+- https://pdp-11.nl/pdp11-70startpage.html
+- https://www.pcjs.org/machines/dec/pdp11/panel/1170/
+
+No font files, images or shaders from third parties are bundled. The single
+shader, shaders/lock_vignette.frag.qsb, is built from the repository's own
+source and uses one uniform, strength.

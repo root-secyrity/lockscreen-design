@@ -1,32 +1,59 @@
 {
-  "schema": 1,
-  "lockscreens": [
-    {
-      "id": "terminal",
-      "name": "Terminal",
-      "version": "1.2.2",
-      "path": "lockscreens/terminal",
-      "author": "root-sec",
-      "upstream": "https://github.com/root-secyrity/lockscreen-design",
-      "summary": "A phosphor CRT console lock for Ryoku.",
-      "description": "A full-screen terminal lock: phosphor-style console type on a near-black surface, a live status readout (host, uptime, lock age, load, temperature) and a sortable process table, under a CRT post-effect. Password entry happens in the hidden field the qylock engine owns.",
-      "tags": [
-        "terminal",
-        "crt",
-        "dark",
-        "console",
-        "minimal"
-      ],
-      "accent": "#bb2626",
-      "surface": "#161616",
-      "preview": "assets/preview.gif",
-      "screenshots": [
-        "assets/shot-1.png"
-      ],
-      "manifest": "manifest.json",
-      "manifestSha256": "fcf8000e568c84fb1d521edbb267554e9d910af7e70a56b3c2ac770da9203723",
-      "official": false,
-      "lastUpdated": "2026-10-26"
-    }
-  ]
+ "schema": 1,
+ "lockscreens": [
+  {
+   "id": "pdp11-panel",
+   "name": "PDP-11 Panel",
+   "version": "1.0.0",
+   "path": "lockscreens/pdp11-panel",
+   "author": "root-sec",
+   "upstream": "https://github.com/root-secyrity/lockscreen-design",
+   "summary": "A PDP-11 front panel lamp console lock for Ryoku.",
+   "description": "A full-screen lock shaped like a PDP-11/70 front panel: two rows of sixteen address and data lamps, a 22 paddle switch register, the five console keys (LOAD ADRS, EXAM, DEP, CONT, START), an ENABLE/HALT lever and a LOCK knob. Keystrokes shift the DATA register one bit at a time. A refused password makes the machine fault instead of flashing red: one red lamp sweeps the DATA row in 560 ms, the row blinks twice, then the panel returns to normal while the status line reports the attempt count. Power keys arm on a first press and execute on a second press within three seconds. Password entry happens in the hidden field the qylock engine owns.",
+   "tags": [
+    "pdp11",
+    "retro",
+    "hardware",
+    "panel",
+    "dark"
+   ],
+   "accent": "#C62828",
+   "surface": "#121110",
+   "preview": "assets/preview.gif",
+   "screenshots": [
+    "assets/shot-1.png"
+   ],
+   "manifest": "manifest.json",
+   "manifestSha256": "64ccf2f70d18c8c5d1b23b535009d6cb52068ea18693ec1f9a25d50c9f6ec917",
+   "official": false,
+   "lastUpdated": "2026-10-26"
+  },
+  {
+   "id": "terminal",
+   "name": "Terminal",
+   "version": "1.2.2",
+   "path": "lockscreens/terminal",
+   "author": "root-sec",
+   "upstream": "https://github.com/root-secyrity/lockscreen-design",
+   "summary": "A phosphor CRT console lock for Ryoku.",
+   "description": "A full-screen terminal lock: phosphor-style console type on a near-black surface, a live status readout (host, uptime, lock age, load, temperature) and a sortable process table, under a CRT post-effect. Password entry happens in the hidden field the qylock engine owns.",
+   "tags": [
+    "terminal",
+    "crt",
+    "dark",
+    "console",
+    "minimal"
+   ],
+   "accent": "#bb2626",
+   "surface": "#161616",
+   "preview": "assets/preview.gif",
+   "screenshots": [
+    "assets/shot-1.png"
+   ],
+   "manifest": "manifest.json",
+   "manifestSha256": "fcf8000e568c84fb1d521edbb267554e9d910af7e70a56b3c2ac770da9203723",
+   "official": false,
+   "lastUpdated": "2026-10-26"
+  }
+ ]
 }
