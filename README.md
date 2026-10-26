@@ -75,32 +75,6 @@ python3 -c "import json,hashlib,sys;s=sys.argv[1];r=next(e for e in json.load(op
 One folder and one registry entry per skin. No other files are required, and the
 package must not reference paths outside `lockscreens/<id>/`.
 
-## PDP-11 Panel specifics
-
-`pdp11-panel` needs no daemon and no service. It reads `/proc` and `/sys` files
-directly for the CONSOLE column (kernel, uptime, lock age, load, memory,
-temperature) and reads `sessionModel` for the SYSTEM MAP column, so both columns
-show live values on a clean install.
-
-Keys on the plate:
-
-- `LOAD ADRS` cycles the session that `sddm.login` will start.
-- `EXAM` toggles the CONSOLE reading in the status line.
-- `CONT` clears the password field.
-- `START` submits, and is latched down while authentication is in flight.
-- `DEP` is drawn but inert, and the plate says so.
-- `SLEEP`, `REBOOT`, `SHUTDOWN` need two presses within three seconds. They call
-  the engine shim (`sddm.suspend`, `sddm.reboot`, `sddm.powerOff`), which maps to
-  `ryoku-shell suspend` and `ryoku-host power reboot|poweroff`. There is no
-  `halt` in the shim, so the `ENABLE/HALT` lever only freezes the lamp refresh.
-
-A refused password does not flood the panel red. One red lamp sweeps the DATA row
-in 560 ms, the row blinks twice, then the panel returns to normal while the status
-line reports the attempt count.
-
-`theme.conf` carries `powerRow=true` in the shipped package. Set it to `false` to
-make the three power keys inert; nothing else changes.
-
 ## The PROCESSES box (terminal skin) and its daemon
 
 The `terminal` skin shows a process table (PID / NAME / CPU / MEM). A lock theme

@@ -2,7 +2,7 @@
 Name=PDP-11 Panel
 Description=Ryoku PDP-11 front panel lock (lamp console)
 Author=root-sec
-Version=1.0.0
+Version=1.0.1
 Type=sddm-theme
 MainScript=Main.qml
 ConfigFile=theme.conf
