@@ -2,15 +2,15 @@
   "schema": 1,
   "id": "terminal",
   "category": "lockscreens",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "destination": "qylock/themes/terminal",
   "files": [
     {
       "source": "content/Main.qml",
       "destination": "Main.qml",
       "mode": "0644",
-      "size": 33706,
-      "sha256": "86112514616fee9aa115ab22a1e3f6a8040b968439f5e01db35f51588d095b0d",
+      "size": 33400,
+      "sha256": "b09c9a6df5d609cfdafec8a489bb0e769c424f2259002d18f3d7c3817d6e9d71",
       "install": true
     },
     {
@@ -18,7 +18,7 @@
       "destination": "metadata.desktop",
       "mode": "0644",
       "size": 179,
-      "sha256": "5af796c6abf0868167de044d33cce1a64b79f1415a293de9515df783625d5c53",
+      "sha256": "48653ba8abbd05042d612eb9a4b968324bcb6f33a2ff5614f35e39135a3de12e",
       "install": true
     },
     {
@@ -73,24 +73,24 @@
       "source": "PROVENANCE.txt",
       "destination": "PROVENANCE.txt",
       "mode": "0644",
-      "size": 252,
-      "sha256": "67b0a9efeddf125d537094ccc16fe664b969989639150ee06f3dea1528891b66",
+      "size": 406,
+      "sha256": "baeac18483140a4f6f8edd2dd9a3e44c6d53bf4695cc9eda4c7ac1151bee2a3b",
       "install": true
     },
     {
       "source": "assets/preview.gif",
       "destination": "preview.gif",
       "mode": "0644",
-      "size": 138918,
-      "sha256": "0fcc421f60b6e6b2ca7c03476f0d74ffc11de3acfdb1c0273e1d3f1d14a07d9e",
+      "size": 138226,
+      "sha256": "84a70d7dafb82dff9d8632099f65cb05e14bde13608191ade3d2843311c70366",
       "install": false
     },
     {
       "source": "assets/shot-1.png",
       "destination": "shot-1.png",
       "mode": "0644",
-      "size": 335688,
-      "sha256": "2717a3bbbab6ef0360382ff1beb752b410f81e14350fabc55d8507200cf047f1",
+      "size": 333626,
+      "sha256": "f956b736c1db382e3275549ebdace28c4ee4d677584863c2e3b06b22f9e898a5",
       "install": false
     }
   ]

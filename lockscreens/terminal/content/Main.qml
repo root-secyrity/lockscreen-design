@@ -178,9 +178,6 @@ Rectangle {
         return lines.join("\n");
     }
 
-    // TODO(next change): clip() has no caller - delete it together with the
-    // next edits, then one lock run covers both (user, 2026-10-26)
-    function clip(s, maxChars) { if (!s) return ""; if (maxChars <= 1) return ""; if (s.length <= maxChars) return s; return s.slice(0, maxChars - 1) + "…"; }
     function readKeyboard() {
         if (typeof keyboard !== "undefined") {
             root.capsOn = keyboard.capsLock;

@@ -4,12 +4,12 @@
     {
       "id": "terminal",
       "name": "Terminal",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "path": "lockscreens/terminal",
       "author": "root-sec",
-      "upstream": "local",
+      "upstream": "https://github.com/root-secyrity/lockscreen-design",
       "summary": "A phosphor CRT console lock for Ryoku.",
-      "description": "A full-screen terminal lock: phosphor-on-black console type, a live status readout (uptime, load, memory, temperature, media, keymap) and a CRT post-effect. Password entry happens in the hidden field the qylock engine owns.",
+      "description": "A full-screen terminal lock: phosphor-style console type on a near-black surface, a live status readout (host, uptime, lock age, load, temperature) and a sortable process table, under a CRT post-effect. Password entry happens in the hidden field the qylock engine owns.",
       "tags": [
         "terminal",
         "crt",
@@ -24,7 +24,7 @@
         "assets/shot-1.png"
       ],
       "manifest": "manifest.json",
-      "manifestSha256": "c54fbbaec2a1830f08ec6b510a5bfb9ccd5c5afc14b8d904025950abb7f8a291",
+      "manifestSha256": "fcf8000e568c84fb1d521edbb267554e9d910af7e70a56b3c2ac770da9203723",
       "official": false,
       "lastUpdated": "2026-10-26"
     }

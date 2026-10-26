@@ -1,8 +1,9 @@
 Terminal - qylock lock skin for Ryoku
 
 Author: root-sec
-Upstream: local
-Original path: designs/terminal/
+Upstream: https://github.com/root-secyrity/lockscreen-design
+Source: https://github.com/root-secyrity/lockscreen-design/tree/main/lockscreens/terminal
+Original path: designs/terminal/ (author workspace)
 License: MIT; see LICENSE
 
 Preview media (assets/preview.gif, assets/shot-*.png) is catalogue media and is not
