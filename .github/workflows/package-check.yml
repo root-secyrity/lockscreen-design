@@ -1,0 +1,28 @@
+name: package-check
+
+# Proves that the shipped bytes are the bytes the manifest describes.
+# Runs on the published tree only: there is no designs/ and no pack.py here, so
+# this is deliberately not the drift guard from the author workspace.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    name: package integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the tree
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Report python version
+        run: python3 --version
+      - name: Verify every package against its manifest
+        run: python3 .github/verify_package.py .
