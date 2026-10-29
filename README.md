@@ -8,14 +8,14 @@ later follows the same layout.
 
 | id | version | summary |
 |---|---|---|
-| `pdp11-panel` | 1.0.0 | PDP-11/70 front panel: lamp rows, switch register, console keys, fault sweep |
+| `pdp11-panel` | 1.0.1 | PDP-11/70 front panel: lamp rows, switch register, console keys, fault sweep |
 | `terminal` | 1.2.2 | phosphor CRT console with a tty clock, status readout, session switcher |
 
 ### Screenshots
 
-![pdp11-panel 1.0.0 - PDP-11/70 front panel: lamp rows, switch register, console keys, fault sweep](lockscreens/pdp11-panel/assets/shot-1.png)
+![pdp11-panel 1.0.1 - PDP-11/70 front panel: lamp rows, switch register, console keys, fault sweep](lockscreens/pdp11-panel/assets/shot-1.png)
 
-`pdp11-panel` 1.0.0 - PDP-11/70 front panel: lamp rows, switch register, console
+`pdp11-panel` 1.0.1 - PDP-11/70 front panel: lamp rows, switch register, console
 keys, fault sweep.
 
 ![terminal 1.2.2 - phosphor CRT console with a tty clock, status readout, session switcher](lockscreens/terminal/assets/shot-1.png)
