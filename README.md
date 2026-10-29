@@ -11,6 +11,18 @@ later follows the same layout.
 | `pdp11-panel` | 1.0.0 | PDP-11/70 front panel: lamp rows, switch register, console keys, fault sweep |
 | `terminal` | 1.2.2 | phosphor CRT console with a tty clock, status readout, session switcher |
 
+### Screenshots
+
+![pdp11-panel 1.0.0 - PDP-11/70 front panel: lamp rows, switch register, console keys, fault sweep](lockscreens/pdp11-panel/assets/shot-1.png)
+
+`pdp11-panel` 1.0.0 - PDP-11/70 front panel: lamp rows, switch register, console
+keys, fault sweep.
+
+![terminal 1.2.2 - phosphor CRT console with a tty clock, status readout, session switcher](lockscreens/terminal/assets/shot-1.png)
+
+`terminal` 1.2.2 - phosphor CRT console with a tty clock, status readout, session
+switcher.
+
 ## Install a skin
 
 Replace `pdp11-panel` with the id you want:
